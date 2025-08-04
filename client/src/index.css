@@ -1,0 +1,117 @@
+/* css code for news///////////////////////////////////////////////////////////////////////////////////////////////////////// */
+
+.single_news{
+  padding: 12px;
+  margin-top: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.news-card img {
+  border-radius: 6px;
+  margin-bottom: 10px;
+}
+
+/* code for Navbar////////////////////////////////////////////////////////////////////////////////////////////////////////// */
+
+.navbar {
+  background-color: #1e1e1e;
+  color: #fff;
+  padding: 12px 24px;
+  display: flex;
+  align-items: center;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+  justify-content: space-between;
+}
+
+.navbar-brand {
+  font-size: 20px;
+  font-weight: bold;
+  font-family: 'Segoe UI', sans-serif;
+
+}
+.navbar-brand img {
+  height: 25px;
+  width:25px;
+}
+nav{
+  font-size: 10px;
+  color: aqua;
+
+}
+
+#switchCheckDefault{
+  width:40px;
+  height:20px;
+  margin-right:5px;
+}
+
+.form-check{
+  display: flex;
+  align-items: center;
+  font-size: larger;
+}
+
+
+
+
+/* css code for sdarch results//////////////////////////////////////////////////////////////////////////////////////////////////////  */
+.searchresult {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f9f9fb;
+}
+
+.resultcontainer {
+  background-color: white;
+  border-radius: 12px;
+  padding: 16px;
+  margin-bottom: 16px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.resultcontainer:hover {
+  background-color: #f0f0f5;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.resultcontainer h3 {
+  margin: 0 0 8px;
+  font-size: 1.2rem;
+  color: #1a1a1a;
+}
+
+.resultcontainer a {
+  display: inline-block;
+  margin-bottom: 10px;
+  color: #0066cc;
+  text-decoration: none;
+  word-break: break-all;
+}
+
+.resultcontainer a:hover {
+  text-decoration: underline;
+}
+
+.resultcontainer p {
+  margin: 0;
+  color: #444;
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+/* css code for weather ////////////////////////////////////////////////////// */
+.heading{
+  font-family: "Segoe UI"
+}
+.eachdayweather img {
+  border-radius: 6px;
+  margin-bottom: 10px;
+}
+.singledayweather{
+  padding: 12px;
+  margin-top: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}

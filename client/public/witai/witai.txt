@@ -1,0 +1,27 @@
+curl.exe -X POST "https://api.wit.ai/utterances?v=20240730" `
+  -H "Authorization: Bearer SN6CN5NODM3BS3ZNK7YPT32WEZPG5U6F" `
+  -H "Content-Type: application/json" `
+  --data-binary "@C:\Users\avina\Downloads\fixed_witai_utterances.json"
+
+
+
+
+[{
+        "text": "What is quantum computing?",
+        "intent": "search",
+        "entities": [
+          {
+            "entity": "search_topic:search_topic",
+            "start": 8,
+            "end": 25,
+            "body": "quantum computing",
+            "entities": [ ]
+          }
+        ],
+        "traits": [
+          {
+             "trait": "question_type",
+              "value": "definition"
+          }
+        ]
+      }]

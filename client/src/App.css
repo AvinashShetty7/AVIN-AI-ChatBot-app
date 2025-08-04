@@ -1,0 +1,162 @@
+
+/* App.css */
+
+body {
+  margin: 0;
+  padding: 0;
+  height:100vh;
+  overflow: hidden;
+  font-family: 'Open Sans', sans-serif;
+  background-color: #75787d;
+  /* background-color:#1e1e1e ; */
+    /* background: linear-gradient(to right, #4facfe, #00f2fe); */
+      /* background: linear-gradient(to right, #4facfe, #ae00fe); */
+}
+h1{
+
+    display: inline-block;
+    color: rgb(243, 241, 241);
+    padding: 0.2em 0.4em;
+    border-radius: 6px;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+
+.body_of_the_app {
+  display: flex;
+  
+}
+.tag_lines{
+  
+  min-width: 350px;
+  max-width: 350px;
+   
+}
+
+.container {
+  height:530px;/*472px;*/
+  /* background-color:#ffffff; */
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  /* box-shadow: 0 0 10px rgba(0,0,0,0.1); */
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none;  /* IE/Edge */
+    border:none;
+}
+.msg{
+    position: relative;
+    /* background-color: #0084ff; */
+    height: 630px;/*550px;*/
+    margin: 50px auto;
+    margin-top:-10px;
+    width: 100%;
+    max-width:850px;
+    padding: 15px;
+}
+
+#message {
+  max-width: 70%;
+  margin: 5px 0;
+  padding: 10px 14px;
+  border-radius: 18px;
+  line-height: 1.4;
+  word-wrap: break-word;
+  /*  */
+  font-size: 16px;
+  line-height: 1.5;
+  font-weight: 400;
+  font-family: 'Segoe UI';
+
+  
+}
+
+.messagedarkuser{
+  /* background-color: #dcf8c6; */
+  background-color:#2f3030;
+  color: #ffffff;
+  align-self: flex-end;
+  border-bottom-right-radius: 0;
+}
+.messagelightuser{
+  /* background-color: #dcf8c6; */
+  background-color:#dcf8c6;
+  color:black;
+  align-self: flex-end;
+  border-bottom-right-radius: 0;
+}
+
+.messagelightbot{
+  /* background-color: #f1f0f0; */
+  /* background-color:rgb(23, 23, 23); */
+  background-color:#f1f0f0 ;
+  color:black;
+  align-self: flex-start;
+  border-bottom-left-radius: 0;
+  width:max-content;
+  
+}
+.messagedarkbot{
+  /* background-color: rgb(23, 23, 23); */
+  background-color: #1e1e1e;
+  color:white;
+  align-self: flex-start;
+  border-bottom-left-radius: 0;
+  width:max-content;
+  
+}
+.chat-input {
+ position:absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: #1e1e1e;
+  
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  border-top: 1px solid #ccc;
+  border-radius: 10px;
+  border: 1px solid #ddd;
+  width:800px;
+  display: flex;
+  justify-self: center;
+  margin-bottom: 15px;
+
+
+}
+
+.chat-input input {
+  flex: 1;
+  padding: 10px;
+  border-radius: 20px;
+  border: 1px solid #ccc;
+  outline: none;
+  border:none;
+  /* margin:0px 2px 0px 2px; */
+  background-color: #1e1e1e;
+  color: #ffffff;
+
+}
+
+.chat-input button {
+  margin-left: 10px;
+  padding: 10px 16px;
+  border-radius: 20px;
+  border: none;
+  background-color: #0084ff;
+  color: white;
+  cursor: pointer;
+}
+
+.bi {
+  background-color: #0084ff;
+  padding-left: 15px;
+  padding-right: 15px;
+  
+}
+
