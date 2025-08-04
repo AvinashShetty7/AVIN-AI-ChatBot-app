@@ -9,6 +9,4 @@ app.use(express.json());
 
 const witRoutes = require("./routes/wit");
 app.use("/api/wit", witRoutes);
-
-
 app.listen(5000, () => console.log("Server running on port 5000"));

@@ -1,4 +1,4 @@
-// client/src/components/ChatInput.js
+
 import React, { useState, useRef } from "react";
 import axios from "axios";
 import '../App.css'
@@ -26,13 +26,7 @@ function ChatInput({ onResponse,mode }) {
           return [...updated,{ name: text, from: "user" }];
         });
 
-
-        // onResponse(prev => ([...prev, { name: text, from: "user" }]));
-
         onResponse(prev => [...prev, { name: '...', from: 'bot' }]);
-
-
-
         try {
           const res = await axios.post("http://localhost:5000/api/wit/message", {
             message: text,
@@ -67,32 +61,28 @@ function ChatInput({ onResponse,mode }) {
       return;
     setInput("");
     onResponse(prev => ([...prev, { name: input, from: "user" }]));
-
-    // setIsTyping(true);
-    onResponse(prev => [...prev, { name: '...', from: 'bot' }]);
-
+    onResponse(prev => [...prev, { name: '...', from: 'bot' }]);    //code for ... animation in bot message
 
     try {
       const res = await axios.post("http://localhost:5000/api/wit/message", {
         message: input,
       });
 
-
       onResponse(prev => {
         const updated = [...prev];
         updated.pop(); // remove typing
         console.log(res.data);
-
-
         return [...updated, { name: res.data, from: "bot" }];
       });
-
-      // onResponse(prev => ([...prev,{ name: res.data, from: "bot" }]));
-
     } catch (err) {
       console.error("Error sending message:", err);
     }
   };
+  const handleKeyPress=(e)=>{
+    if(e.key=="Enter")
+       handleSend(); 
+
+  }
 
   return (
 
@@ -104,6 +94,7 @@ function ChatInput({ onResponse,mode }) {
         value={input}
         onChange={(e) => setInput(e.target.value)}
         placeholder="Type your message"
+        onKeyDown={handleKeyPress}
 
       />
       <button className='send' onClick={handleSend}><i className="bi bi-send-fill"></i></button>

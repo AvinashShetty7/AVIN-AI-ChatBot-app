@@ -3,7 +3,7 @@ const express = require("express");
 const axios = require("axios");
 const router = express.Router();
 // const fetch = require('node-fetch');
-const { htmlToText } = require('html-to-text');
+// const { htmlToText } = require('html-to-text');
 
 const WIT_TOKEN = "Bearer SN6CN5NODM3BS3ZNK7YPT32WEZPG5U6F";
 
@@ -20,17 +20,10 @@ router.post("/message", async (req, res) => {
       },
     });
     const data = response.data;
-
-    //  console.log('Wit.ai full response:', JSON.stringify(data, null, 2));
-
-
-    const intent = data.intents?.[0]?.name || null;
+    const intent = data.intents?.[0]?.name || null;  //to takes intent only
     const confidence = data.intents?.[0]?.confidence || 0;
 
     //  Decide response based on intent
-
-    
-
     if (intent == "thank_you") {
       const replies = [
         "You're welcome!",
@@ -118,22 +111,16 @@ router.post("/message", async (req, res) => {
         const reply = "please mention name of city"
         res.json(reply)
       }
-
-
-
       const weather = await axios.get(`http://api.weatherapi.com/v1/forecast.json?key=7d77a4a13c6146f9b0262609250607&days=3&q=${loc}`, {
         headers: {
           'Content-Type': 'application/json'
         }
       });
       weatherdata = weather.data
-      // console.log(weatherdata);
       const days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
       const topthreedayreport= (weatherdata.forecast.forecastday || []).slice(0, 3).map(singledayreport => {
               const dateObj = new Date(singledayreport.date);
               const curdate = new Date();
-
-
                 return {
                   tag:'weather',
                   cur_celsius:weatherdata.current.temp_c,
@@ -198,7 +185,6 @@ router.post("/message", async (req, res) => {
       res.json('currently unavilable')
      }
      
-      
       const topFive = (newsdata.articles || []).slice(0, 5).map(article => ({
           tag:'news',
           title: article.title,
@@ -241,11 +227,6 @@ router.post("/message", async (req, res) => {
               // console.log(topFivesearch);
               
                res.json(topFivesearch)
-             
-              
-              
-              
-
     }
     else if(intent == 'bot_identity'){
        const botidentity = [
@@ -273,7 +254,6 @@ router.post("/message", async (req, res) => {
 
     }
     else {
-
       let reply = "Sorry, I didn't understand.";
       res.json(reply);
     }

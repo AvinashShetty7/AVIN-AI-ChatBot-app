@@ -12,18 +12,17 @@ import Weatherreport from "./components/Weatherreport";
 
 function App() {
   const [response, setResponse] = useState([]);
-      const [darkMode, setDarkMode] = useState(false);
-    let mode = darkMode ? 'dark' : 'light';
+  const [darkMode, setDarkMode] = useState(false);
+  let mode = darkMode ? 'dark' : 'light';
 
   
   return (
     <>
     <div style={{ backgroundColor: mode=='dark' ? '#1e1e1e ' : 'white'}}>
        
-        <Navbar setDarkMode={setDarkMode} mode={mode}/>
+      <Navbar setDarkMode={setDarkMode} mode={mode}/>
       <div className="body_of_the_app">
         <Textchange mode={mode} />
-
         <div className=" msg">
           <div  className='container' style={{ backgroundColor: mode=='dark' ? '#1e1e1e ' : 'white'}} >
             {response.map((item, index) => {
@@ -46,8 +45,6 @@ function App() {
                       )}
               </div>
             })}
-            {/* </div>
-        <div> */}
         
             <ChatInput onResponse={setResponse} mode={mode} />
 

@@ -9,11 +9,6 @@ export default function Navbar(props) {
           <input  onClick={() => props.setDarkMode(prev => !prev)} className="form-check-input" type="checkbox" role="switch" id="switchCheckDefault"/>
           <label className="form-check-label" htmlFor="switchCheckDefault">{props.mode=='light'?'DARK THEME':'LIGHT THEME'}</label>
         </div>
-
-
-       {/* <button className='togglebutton' onClick={() => props.setDarkMode(prev => !prev)}>
-        <i  style={{backgroundColor: props.mode=='dark' ? '#1e1e1e ' : '#1e1e1e',color:props.mode=='dark' ?'black':'white'}} className="bi bi-toggle-on"></i>
-      </button> */}
     </nav>
   )
 }
