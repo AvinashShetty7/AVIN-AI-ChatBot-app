@@ -55,6 +55,15 @@ nav{
 
 
 /* css code for sdarch results//////////////////////////////////////////////////////////////////////////////////////////////////////  */
+.searchimg img{
+  width:30%;
+  height: 200px;
+  object-fit: cover;
+  margin-left: 5px;
+  border-radius: 5px;
+  margin-bottom: 20px;
+
+}
 .searchresult {
   max-width: 800px;
   margin: 0 auto;
@@ -86,7 +95,7 @@ nav{
 .resultcontainer a {
   display: inline-block;
   margin-bottom: 10px;
-  color: #0066cc;
+  color: #6793c0;
   text-decoration: none;
   word-break: break-all;
 }

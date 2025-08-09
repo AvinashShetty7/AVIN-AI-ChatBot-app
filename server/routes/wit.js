@@ -20,8 +20,12 @@ router.post("/message", async (req, res) => {
       },
     });
     const data = response.data;
+    console.log(data);
+    
     const intent = data.intents?.[0]?.name || null;  //to takes intent only
     const confidence = data.intents?.[0]?.confidence || 0;
+    console.log(intent);
+    
 
     //  Decide response based on intent
     if (intent == "thank_you") {
@@ -206,9 +210,37 @@ router.post("/message", async (req, res) => {
 
     }
     else if (intent=='search'){
+      let searchwikiitems="";
       const apikey='AIzaSyBk53CuH3m4nwwQaCZttzYCVn2PjqsPrsU';
       const cx='b10e0014bfadd4f18'
       const query = message;// it is from message block to pass query to google search engine
+
+      const entityKeys = Object.keys(data.entities);
+      const entityKey=entityKeys[0];
+      console.log(entityKey);
+      
+      if (entityKeys.length !== 0) {
+              const  querywiki=data.entities[entityKey][0].value;
+              console.log(querywiki+"hhhhhhhhhhhhhhh");
+                const urlwiki = `https://en.wikipedia.org/api/rest_v1/page/summary/${querywiki}`;
+                try{
+                        const searchwiki = await axios.get(`${urlwiki}`, {
+                        headers: {
+                          'Content-Type': 'application/json'
+                        }
+                      });
+                      searchwikiitems=searchwiki.data.extract;
+                      // console.log(searchwikiitems.extract);
+                      console.log(searchwiki.data);
+                      
+                }catch(error)
+                {
+                  console.log("something wrong!");         
+                  // res.json("something went wrong")
+                }
+               
+            }
+            
       const url = `https://www.googleapis.com/customsearch/v1?q=${encodeURIComponent(query)}&key=${apikey}&cx=${cx}`;
         const search = await axios.get(`${url}`, {
                 headers: {
@@ -216,18 +248,40 @@ router.post("/message", async (req, res) => {
                 }
               });
               searchitems=search.data;
-              console.log(searchitems);
+              // console.log(searchitems);
 
               const topFivesearch = (searchitems.items || []).slice(0, 5).map(items => ({
                 tag:"searchresults",
+                def:searchwikiitems,
                 title:items.title,
                 snippet: items.snippet,
                 link: items.link,
+                img:items.pagemap?.cse_image?.[0]?.src
                }));
-              // console.log(topFivesearch);
+              console.log(topFivesearch);
               
                res.json(topFivesearch)
     }
+
+    // else if(intent=='search'){
+    //   console.log(data);
+    //   const entityKey = Object.keys(data.entities);
+    //   const  query=data.entities[entityKey][0].value;
+    //   console.log(query);
+      
+    //   const url = `https://en.wikipedia.org/api/rest_v1/page/summary/${query}`;
+    //   const search = await axios.get(`${url}`, {
+    //             headers: {
+    //               'Content-Type': 'application/json'
+    //             }
+    //           });
+    //           searchitems=search.data;
+    //           console.log(searchitems);
+    //            res.json(searchitems.extract)
+
+
+
+    // }
     else if(intent == 'bot_identity'){
        const botidentity = [
         "Hi! I’m AVIN — your smart assistant.  I was created by Avinash to help you with daily info like time, weather, news, and more.  Ask me anything, and I’ll do my best to assist you!",
@@ -254,13 +308,27 @@ router.post("/message", async (req, res) => {
 
     }
     else {
-      let reply = "Sorry, I didn't understand.";
+      const fallbackReplies = [
+        "Hmm, I didn’t quite get that. Could you try rephrasing?",
+        "Sorry, I’m not sure what you mean. Can you say it another way?",
+        "I didn’t understand that. Want to ask something else?",
+        "I might have missed that. Can you repeat it more clearly?",
+        "Oops! That went over my head. Say it again?",
+        "Can you please clarify? I want to help.",
+        "That doesn’t make sense to me yet — try again?",
+        "I’m still learning. Could you say it differently?",
+        "Huh, that confused me too 😅 Want to try another way?",
+        "Not sure what that means. Let’s try again?"
+      ];
+      const reply = fallbackReplies[Math.floor(Math.random() * fallbackReplies.length)];
       res.json(reply);
     }
 
   } catch (err) {
     console.error(err.message);
-    res.status(500).json({ error: "Wit.ai request failed" });
+    // res.status(500).json({ error: "Wit.ai request failed" });
+
+    // res.json("check your internet connection")
   }
 });
 

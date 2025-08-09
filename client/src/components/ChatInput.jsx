@@ -3,14 +3,14 @@ import React, { useState, useRef } from "react";
 import axios from "axios";
 import '../App.css'
 
-function ChatInput({ onResponse,mode }) {
+function ChatInput({ onResponse,mode,setShowGreeting }) {
   const [input, setInput] = useState("");
   const recognitionRef = useRef(null);
 
 
   // for speech recognization
   const startListening = () => {
-    
+    setShowGreeting(false)
     if (!recognitionRef.current) {
       const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
       recognitionRef.current = new SpeechRecognition();
@@ -26,7 +26,7 @@ function ChatInput({ onResponse,mode }) {
           return [...updated,{ name: text, from: "user" }];
         });
 
-        onResponse(prev => [...prev, { name: '...', from: 'bot' }]);
+        onResponse(prev => [...prev, { name: '♾️  Just a second ...', from: 'bot' }]);
         try {
           const res = await axios.post("http://localhost:5000/api/wit/message", {
             message: text,
@@ -57,11 +57,12 @@ function ChatInput({ onResponse,mode }) {
   // for message type 
 
   const handleSend = async () => {
+    setShowGreeting(false)
     if (input.length == 0)
       return;
     setInput("");
     onResponse(prev => ([...prev, { name: input, from: "user" }]));
-    onResponse(prev => [...prev, { name: '...', from: 'bot' }]);    //code for ... animation in bot message
+    onResponse(prev => [...prev, { name: '♾️  Just a second ...', from: 'bot' }]);    //code for ... animation in bot message
 
     try {
       const res = await axios.post("http://localhost:5000/api/wit/message", {

@@ -10,7 +10,7 @@ export default function News(props) {
                 <h4>{item.title}</h4>
                 <img src={item.image} alt="news" style={{ width: '100%', maxHeight: '200px', objectFit: 'cover' }}/>
                 <p>{item.description}</p>
-                <a href={item.link} target="_blank" rel="noopener noreferrer">🔗 Read More</a>
+                <a href={item.link} target="_blank" rel="noopener noreferrer" style={{color:'#6793c0',textDecoration:'none'}}>🔗 Read More</a>
                 <p><em>Source: {item.source}</em></p>
                 </div>
         ))}

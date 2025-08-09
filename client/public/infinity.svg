@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  This is a cleaner SVG file for the infinity emoji,
+  with improved positioning to avoid being cut off.
+-->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <!-- 
+    The text element has been adjusted.
+    - `x="50"` and `text-anchor="middle"` center the symbol horizontally.
+    - `y="70"` and a smaller `font-size="70"` provide proper vertical spacing.
+  -->
+  <text x="50" y="70" font-size="70" text-anchor="middle">♾️</text>
+</svg>

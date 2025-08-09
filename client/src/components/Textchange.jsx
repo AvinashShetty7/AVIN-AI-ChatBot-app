@@ -22,7 +22,8 @@ const Textchange = (props) => {
  
   return (
     <div className='tag_lines' style={{ backgroundColor: props.mode=='dark' ? ' black' : '#f9f9f9'}}>
-          <h1  style={{color: props.mode=='dark' ? '#fff ' : 'black'}}>{messages[index]}</h1>
+          {/* <h1  style={{color: props.mode=='dark' ? '#fff ' : 'black'}}>{messages[index]}</h1> */}
+          <p style={{ color: props.mode=='dark' ? ' #fff ' : 'black'}}>New chat</p>
     </div>
   );
 };
