@@ -5,7 +5,7 @@ const router = express.Router();
 // const fetch = require('node-fetch');
 // const { htmlToText } = require('html-to-text');
 
-const WIT_TOKEN = "Bearer SN6CN5NODM3BS3ZNK7YPT32WEZPG5U6F";
+const WIT_TOKEN = process.env.WIT_TOKEN;
 
 router.post("/message", async (req, res) => {
   const { message } = req.body;
@@ -107,7 +107,7 @@ router.post("/message", async (req, res) => {
 
     }
     else if (intent == 'get_weather') {
-
+      const weather_key=process.env.WEATHER_KEY;
       const loc = data.entities?.['wit$location:location']?.[0]?.body || null
       console.log(loc);
       
@@ -115,7 +115,7 @@ router.post("/message", async (req, res) => {
         const reply = "please mention name of city"
         res.json(reply)
       }
-      const weather = await axios.get(`http://api.weatherapi.com/v1/forecast.json?key=7d77a4a13c6146f9b0262609250607&days=3&q=${loc}`, {
+      const weather = await axios.get(`http://api.weatherapi.com/v1/forecast.json?key=${weather_key}&days=3&q=${loc}`, {
         headers: {
           'Content-Type': 'application/json'
         }
@@ -150,7 +150,7 @@ router.post("/message", async (req, res) => {
         const today = new Date();
         const formattedDate = today.toISOString().split('T')[0];
 
-       const  apikey = 'e1a29da8556a656ad57a48b98d32dd37';
+       const  apikey = process.env.NEWS_KEY;
        const loc = data.entities?.['wit$location:location']?.[0]?.body || null
         console.log(loc);
         if(loc==null){
@@ -211,8 +211,8 @@ router.post("/message", async (req, res) => {
     }
     else if (intent=='search'){
       let searchwikiitems="";
-      const apikey='AIzaSyBk53CuH3m4nwwQaCZttzYCVn2PjqsPrsU';
-      const cx='b10e0014bfadd4f18'
+      const apikey=process.env.GOOGLE_API_KEY;
+      const cx=process.env.CX;
       const query = message;// it is from message block to pass query to google search engine
 
       const entityKeys = Object.keys(data.entities);
@@ -221,7 +221,7 @@ router.post("/message", async (req, res) => {
       
       if (entityKeys.length !== 0) {
               const  querywiki=data.entities[entityKey][0].value;
-              console.log(querywiki+"hhhhhhhhhhhhhhh");
+              console.log(querywiki);
                 const urlwiki = `https://en.wikipedia.org/api/rest_v1/page/summary/${querywiki}`;
                 try{
                         const searchwiki = await axios.get(`${urlwiki}`, {
