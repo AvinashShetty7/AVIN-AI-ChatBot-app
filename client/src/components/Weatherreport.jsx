@@ -8,7 +8,7 @@ export default function Weatherreport(props) {
       <div className="eachdayweather" >
 
         {props.item.name.map((item) => (
-                <div className='singledayweather' style={{backgroundColor: props.mode=='dark' ? '#1e1e1e ' : 'white',border: props.mode=='dark' ? ' 1px solid #2c2e30ff' : ' 1px solid white'}}>
+                <div className='singledayweather' style={{backgroundColor: props.mode=='dark' ? '#212121 ' : 'white',border: props.mode=='dark' ? ' 1px solid #2c2e30ff' : ' 1px solid white'}}>
                 <p style={{ width: '100%', maxHeight: '200px',marginRight:'70px'  }}>
                     {
                         (()=>{

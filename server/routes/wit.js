@@ -2,8 +2,8 @@
 const express = require("express");
 const axios = require("axios");
 const router = express.Router();
-// const fetch = require('node-fetch');
-// const { htmlToText } = require('html-to-text');
+const { GoogleGenerativeAI } = require("@google/generative-ai");
+
 
 const WIT_TOKEN = process.env.WIT_TOKEN;
 
@@ -28,7 +28,7 @@ router.post("/message", async (req, res) => {
     
 
     //  Decide response based on intent
-    if (intent == "thank_you") {
+    if (intent == "thank_you1") {
       const replies = [
         "You're welcome!",
         "Happy to help! 😊",
@@ -44,7 +44,7 @@ router.post("/message", async (req, res) => {
       const reply = replies[Math.floor(Math.random() * replies.length)];
       res.json(reply);
 
-    } else if (intent == "goodbye") {
+    } else if (intent == "goodbye1") {
       const farewells = [
         "Goodbye! Take care. 👋",
         "See you later! 😊",
@@ -61,7 +61,7 @@ router.post("/message", async (req, res) => {
       res.json(reply);
 
     }
-    else if (intent == 'greet') {
+    else if (intent == 'greet1') {
       const greetings = [
         "Hey there! How can I help you today?",
         "Hello! What can I do for you?",
@@ -78,7 +78,7 @@ router.post("/message", async (req, res) => {
       res.json(reply);
 
     }
-    else if (intent == 'get_help') {
+    else if (intent == 'get_help1') {
       const helpResponses = [
         "I’m here to help! You can ask me things like:\n- What's the weather in Chennai?\n- Translate 'hello' to Hindi\n- Tell me a fun fact\n- What's the time now?",
         "Sure! I can help with:\n- Translations 🌐\n- Weather info 🌤️\n- Fun facts 💡\nJust type your question!",
@@ -89,7 +89,7 @@ router.post("/message", async (req, res) => {
       res.json(reply);
 
     }
-    else if (intent == 'unknown') {
+    else if (intent == 'unknown1') {
       const fallbackReplies = [
         "Hmm, I didn’t quite get that. Could you try rephrasing?",
         "Sorry, I’m not sure what you mean. Can you say it another way?",
@@ -106,7 +106,7 @@ router.post("/message", async (req, res) => {
       res.json(reply);
 
     }
-    else if (intent == 'get_weather') {
+    else if (intent == 'get_weather1') {
       const weather_key=process.env.WEATHER_KEY;
       const loc = data.entities?.['wit$location:location']?.[0]?.body || null
       console.log(loc);
@@ -146,7 +146,7 @@ router.post("/message", async (req, res) => {
 
 
     }
-    else if(intent == 'get_news'){
+    else if(intent == 'get_news1'){
         const today = new Date();
         const formattedDate = today.toISOString().split('T')[0];
 
@@ -206,10 +206,48 @@ router.post("/message", async (req, res) => {
       res.json(topFive);
         }
      
-      
+    
+    }
+    else if (intent=='search'||intent=='get_weather'||intent=='get_news'||intent=='greet'||intent=='thank_you'||intent=='goodbye'||intent=='get_date'||intent=='get_time'){
+    
+      const genAI = new GoogleGenerativeAI('AIzaSyBZFsoTm9LUlYw8jo6YZotwOVyzn5nhmGc');
+      try {
+          const prompt= message;
+          const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+          const result = await model.generateContent(prompt);
+          const response = await result.response;
+          const text = response.text();
+          console.log(text);
+          
+          // const javaCodeBlocks = text.match(/```java([\s\S]*?)```/g);
+          //  let cleanCode="";
+
+          //   if (javaCodeBlocks) {
+          //     javaCodeBlocks.forEach((block, index) => {
+          //       cleanCode = block.replace(/```java|```/g, "").trim();
+          //       console.log(`Code Example ${index + 1}:\n`, cleanCode);
+          //     });
+          //   }
+
+          const topFivesearch = [{
+                tag:"searchresults",
+                def:text
+               }];
+
+               
+              // console.log("hi\n"+topFivesearch);
+              
+               res.json(topFivesearch)
+         
+        } catch (error) {
+          console.error('Error calling Gemini API:', error);
+          res.status(500).json({ error: 'Failed to generate content' });
+        }
+
+
 
     }
-    else if (intent=='search'){
+    else if (intent=='searchdemo'){
       let searchwikiitems="";
       const apikey=process.env.GOOGLE_API_KEY;
       const cx=process.env.CX;
@@ -262,26 +300,6 @@ router.post("/message", async (req, res) => {
               
                res.json(topFivesearch)
     }
-
-    // else if(intent=='search'){
-    //   console.log(data);
-    //   const entityKey = Object.keys(data.entities);
-    //   const  query=data.entities[entityKey][0].value;
-    //   console.log(query);
-      
-    //   const url = `https://en.wikipedia.org/api/rest_v1/page/summary/${query}`;
-    //   const search = await axios.get(`${url}`, {
-    //             headers: {
-    //               'Content-Type': 'application/json'
-    //             }
-    //           });
-    //           searchitems=search.data;
-    //           console.log(searchitems);
-    //            res.json(searchitems.extract)
-
-
-
-    // }
     else if(intent == 'bot_identity'){
        const botidentity = [
         "Hi! I’m AVIN — your smart assistant.  I was created by Avinash to help you with daily info like time, weather, news, and more.  Ask me anything, and I’ll do my best to assist you!",

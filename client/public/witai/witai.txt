@@ -1,5 +1,5 @@
 curl.exe -X POST "https://api.wit.ai/utterances?v=20240730" `
-  -H "Authorization: Bearer SN6CN5NODM3BS3ZNK7YPT32WEZPG5U6F" `
+  -H "Authorization: Bearer TOKENOFWIT" `
   -H "Content-Type: application/json" `
   --data-binary "@C:\Users\avina\Downloads\fixed_witai_utterances.json"
 

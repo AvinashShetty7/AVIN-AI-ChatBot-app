@@ -70,7 +70,7 @@ h1{
   line-height: 1.5;
   font-weight: 400;
   font-family: 'Segoe UI';
-  line-height: 1.5;
+  line-height: 1.75;
   /* margin-top:5px; */
 }
 
@@ -103,7 +103,7 @@ h1{
 .messagedarkbot{
   /* background-color: rgb(23, 23, 23); */
 
-  background-color: #1e1e1e;
+  background-color: #212121;
   color:white;
   align-self: flex-start;
   border-bottom-left-radius: 0;

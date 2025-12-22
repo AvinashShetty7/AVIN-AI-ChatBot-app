@@ -10,6 +10,7 @@ import Navbar from "./components/Navbar";
 import Searchresult from "./components/Searchresult";
 import Weatherreport from "./components/Weatherreport";
 import GreetingScreen from "./components/greetingpage";
+import Register from "./components/Register/Register";
 
 function App() {
   const [response, setResponse] = useState([]);
@@ -25,18 +26,15 @@ function App() {
     }
   }, [response]);
 
- 
-
-  
   return (
     <>
-    <div  style={{ backgroundColor: mode=='dark' ? '#1e1e1e ' : 'white'}}>
+    <div  style={{ backgroundColor: mode=='dark' ? '#212121' : 'white'}}>
        
       <Navbar setDarkMode={setDarkMode} mode={mode}/>
       <div className="body_of_the_app">
         <Textchange mode={mode} />
         <div className=" msg">
-          <div  ref={containerRef} className='container' style={{ backgroundColor: mode=='dark' ? '#1e1e1e ' : 'white'}} >
+          <div  ref={containerRef} className='container' style={{ backgroundColor: mode=='dark' ? '#212121' : 'white'}} >
             {showGreeting?<GreetingScreen mode={mode}/>:""}
             {response.map((item, index) => {
               return <div  ref={index === response.length - 2 ? lastMessageRef : null} id='message' className={item.from == 'user' ? mode=='dark'?'messagedarkuser':'messagelightuser' :mode=='dark'?'messagedarkbot':'messagelightbot'} key={index} >

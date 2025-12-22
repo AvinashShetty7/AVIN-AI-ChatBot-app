@@ -3,7 +3,7 @@ import React from "react";
 const GreetingScreen = (props) => {
   return (
     <div
-      style={{backgroundColor:props.mode=='dark'?'#1e1e1e':'white',
+      style={{backgroundColor:props.mode=='dark'?'#212121':'white',
         height: "100vh",
         display: "flex",
         justifyContent: "center",
